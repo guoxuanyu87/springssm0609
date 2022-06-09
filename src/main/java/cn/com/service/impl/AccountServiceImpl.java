@@ -3,6 +3,8 @@ package cn.com.service.impl;
 import cn.com.entity.Account;
 import cn.com.mapper.AccountMapper;
 import cn.com.service.AccountService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -35,5 +37,13 @@ public class AccountServiceImpl implements AccountService {
         int i = 1/0;
         accountMapper.incr(toUser,money);
 
+    }
+
+    @Override
+    public PageInfo<Account> findByPage(int pageIndex, int pageSize) {
+        PageHelper.startPage(pageIndex,pageSize);
+        List<Account> list = this.findAll();
+
+        return new PageInfo<Account>(list,6);
     }
 }

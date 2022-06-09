@@ -1,6 +1,7 @@
 package cn.com.service;
 
 import cn.com.entity.Account;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface AccountService {
 
     void changeAccount(String fromUser, String toUser, double money);
 
+    PageInfo<Account> findByPage(int pageIndex, int pageSize);
 }

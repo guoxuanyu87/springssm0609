@@ -2,6 +2,7 @@ package cn.com.controller;
 
 import cn.com.entity.Account;
 import cn.com.service.AccountService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,16 @@ public class AccountController {
         map.put("list",list);
 
         return "account";
+
+    }
+
+    @RequestMapping(value = "/accountlist",name = "分页查询账户")
+    public String getlist(Map map){
+        int pageIndex = 1;
+        int pageSize= 2;
+        PageInfo<Account> pageInfo = accountService.findByPage(pageIndex,pageSize);
+        map.put("page",pageInfo);
+        return "accountlist";
 
     }
 

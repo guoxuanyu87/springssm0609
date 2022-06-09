@@ -66,7 +66,27 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframew
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <bean id="jobTask" class="cn.com.common.quartz.JobTask"/>
 
+    <bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" lazy-init="false">
+        <property name="targetObject" ref="jobTask"/>
+        <property name="targetMethod" value="printTime"/>
+    </bean>
+
+    <bean id="trigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean" lazy-init="false">
+        <property name="jobDetail" ref="jobDetail"/>
+        <property name="repeatInterval" value="30000"/>
+        <property name="startDelay" value="0"/>
+
+    </bean>
+
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false">
+        <property name="triggers">
+            <list>
+                <ref bean="trigger"/>
+            </list>
+        </property>
+    </bean>
 
 
 

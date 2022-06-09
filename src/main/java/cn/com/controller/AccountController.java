@@ -2,10 +2,13 @@ package cn.com.controller;
 
 import cn.com.entity.Account;
 import cn.com.service.AccountService;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +43,17 @@ public class AccountController {
         PageInfo<Account> pageInfo = accountService.findByPage(pageIndex,pageSize);
         map.put("page",pageInfo);
         return "accountlist";
+
+    }
+
+    @RequestMapping(value = "/sendCode",name = "发送验证码")
+    @ResponseBody
+    public String sendCode(@RequestBody String username){
+
+        JSONObject jsonObject = JSONObject.parseObject(username);
+        String phoneNum = (String) jsonObject.get("phoneNum");
+
+        return "success";
 
     }
 

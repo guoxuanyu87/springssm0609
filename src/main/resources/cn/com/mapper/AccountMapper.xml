@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.mapper.AccountMapper">
+
+    <resultMap id="AccountMap" type="cn.com.entity.Account">
+        <id property="id" column="id"></id>
+        <result property="name" column="user_name"></result>
+        <result property="money" column="money"></result>
+    </resultMap>
+    <update id="decr">
+        update  account set money = money - #{money} where user_name = #{fromUser}
+    </update>
+    <update id="incr">
+        update  account set money = money + #{money} where user_name = #{toUser}
+    </update>
+
+    <select id="findAll" resultMap="AccountMap">
+        select * from account
+    </select>
+
+
+
+</mapper>

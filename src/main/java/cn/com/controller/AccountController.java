@@ -1,5 +1,6 @@
 package cn.com.controller;
 
+import cn.com.common.utils.CreateCode;
 import cn.com.entity.Account;
 import cn.com.service.AccountService;
 import com.alibaba.fastjson.JSONObject;
@@ -52,6 +53,8 @@ public class AccountController {
 
         JSONObject jsonObject = JSONObject.parseObject(username);
         String phoneNum = (String) jsonObject.get("phoneNum");
+        String code = CreateCode.getCode();
+        System.out.println("产生的验证码是："+code+" ，发送给："+phoneNum);
 
         return "success";
 

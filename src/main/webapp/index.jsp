@@ -24,7 +24,7 @@
 <hr/>
 
 <div>
-    <form action="" method="post">
+    <form action="${pageContext.request.contextPath}/login.do" method="post">
         <div>
             <label>用户名：</label>
             <input id="phone" type="text" name="username" placeholder="请输入手机号">
@@ -34,6 +34,7 @@
             <input id="password" name="password" type="password" placeholder="请输入密码">
             <input type="button" id="bt1" value="发送验证码">
         </div>
+        <input type="submit" value="登录">
     </form>
 
 </div>
